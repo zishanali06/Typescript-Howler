@@ -6,7 +6,9 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
     constructor(props: ITimelineProps) {
         super(props);
         this.state = {
-            chirpArray: []
+            chirpArray: [],
+            user: "",
+            chirptext: ""
         }
     }
 
@@ -24,6 +26,10 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
         this.setState({ chirpArray: newchirparray });
     }
 
+    handleonClick () {
+
+    }
+    
     render() {
         return (
             <React.Fragment>
@@ -33,11 +39,28 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
                     <section className="col-4"></section>
                 </section>
                 <section className="row">
-                    <section className="col-4"></section>
                     <section className="col-4">
-                    {this.state.chirpArray.map((chirp: Object, index) => {
-                        return <Chirps chirp={chirp} key={index} />
-                    })}
+                        <form className="form-group p-3 border border-info rounded col-md-12">
+                            <input
+                                type="text"
+                                placeholder="Type Chirp Here"
+                                className="my-3 form-control"
+                                value={this.state.chirptext}
+                                onChange={e => this.setState({ chirptext: e.target.value })} />
+                            <input
+                                type="text"
+                                placeholder="Type Username Here"
+                                className="my-3 form-control"
+                                value={this.state.user}
+                                onChange={e => this.setState({ user: e.target.value })} />
+                            <br />
+                            <button className="btn btn-outline-primary btn-sm" onClick={this.handleonClick}>Click to Add <img src="http://joshi-ma.net/wp-content/uploads/e034.gif" alt="" /></button>
+                        </form>
+                    </section>
+                    <section className="col-4">
+                        {this.state.chirpArray.map((chirp) => {
+                            return <Chirps chirp={chirp} key={chirp.id} />
+                        })}
                     </section>
                     <section className="col-4"></section>
                 </section>
@@ -51,5 +74,11 @@ interface ITimelineProps {
 }
 
 interface ITimelineState {
-    chirpArray: Array<any>
+    chirpArray: {
+        id: number,
+        user: string,
+        chirp: string
+    }[];
+    user: string;
+    chirptext: string;
 }

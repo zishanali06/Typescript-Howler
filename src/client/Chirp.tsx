@@ -24,7 +24,10 @@ export default class Chirps extends React.Component<IChirpProps, IChirpState> {
 }
 
 export interface IChirpProps {
-    chirp: Object
+    chirp: {
+        user: string,
+        chirp: string
+    }
 }
 
 export interface IChirpState {
