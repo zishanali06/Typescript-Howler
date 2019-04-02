@@ -36,11 +36,9 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
                 <section className="row">
                     <section className="col-4"></section>
                     <section className="col-4">
-                    {/* {this.state.chirpArray.map((chirp: object) => {
-                        return console.log(chirp);
-                    })} */}
-                        {/* <Chirps /> */}
-                        <Testing />
+                    {this.state.chirpArray.map((chirp: Object, index) => {
+                        return <Chirps chirp={chirp} key={index} />
+                    })}
                     </section>
                     <section className="col-4"></section>
                 </section>
