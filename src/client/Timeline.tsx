@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Chirps from './Chirp';
-import Testing from './Testing';
 
 export default class Timeline extends React.Component<ITimelineProps, ITimelineState> {
 
@@ -14,15 +13,15 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
     async componentDidMount() {
         let getchirpdata = await fetch('/api/chirp');
         let name = await getchirpdata.json();
-        let newarray = Object.keys(name).map(id => {
+        let newchirparray = Object.keys(name).map(id => {
             return {
                 id,
                 user: name[id].username,
                 chirp: name[id].chirp
             }
         });
-        newarray.pop();
-        this.setState({ chirpArray: newarray });
+        newchirparray.pop();
+        this.setState({ chirpArray: newchirparray });
     }
 
     render() {
