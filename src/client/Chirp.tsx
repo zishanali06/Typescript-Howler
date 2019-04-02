@@ -11,13 +11,14 @@ export default class Chirps extends React.Component<IChirpProps, IChirpState> {
     }
 
     render() {
-        let user = this.props.chirp.user;
-        let chirptext = this.props.chirp.chirp;
-        console.log(user);
-        console.log(chirptext);
+
+        // let user = this.props.chirp.user;
+        // let chirptext = this.props.chirp.chirp;
+        // ABOVE IS SAME AS BELOW
+        const { user, chirp } = this.props.chirp;
         return (
             <div className="text-left">
-                <p className="border border-secondary rounded"><img src="http://joshi-ma.net/wp-content/uploads/e034.gif" alt="" />{`  ${user}: ${chirptext}`}</p>
+                <p className="border border-secondary rounded"><img src="http://joshi-ma.net/wp-content/uploads/e034.gif" alt="" />{`  ${user}: ${chirp}`}</p>
             </div>
         )
     }
@@ -25,6 +26,7 @@ export default class Chirps extends React.Component<IChirpProps, IChirpState> {
 
 export interface IChirpProps {
     chirp: {
+        id: string,
         user: string,
         chirp: string
     }

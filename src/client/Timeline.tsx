@@ -5,13 +5,16 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
 
     constructor(props: ITimelineProps) {
         super(props);
+        
         this.state = {
             chirpArray: [],
             user: "",
-            chirptext: ""
+            chirptext: "",
+            count: 1001
         }
     }
 
+    
     async componentDidMount() {
         let getchirpdata = await fetch('/api/chirp');
         let name = await getchirpdata.json();
@@ -23,13 +26,45 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
             }
         });
         newchirparray.pop();
-        this.setState({ chirpArray: newchirparray });
+        this.setState({ 
+            chirpArray: newchirparray,
+            count: name.nextid
+         });
     }
 
-    handleonClick () {
+    handleonClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        let chirp = {
+            username: this.state.user,
+            chirp: this.state.chirptext
+        };
 
+        fetch('/api/chirp', {
+            method: "POST", 
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow", 
+            referrer: "no-referrer", 
+            body: JSON.stringify(chirp) // body data type must match "Content-Type" header
+        }).then(() => {
+            let chirptoaddinarray = {
+                id: this.state.count.toString(),
+                user: chirp.username,
+                chirp: chirp.chirp
+            }
+            this.setState({
+                chirpArray: [ ...this.state.chirpArray, chirptoaddinarray],
+                user: "",
+                chirptext: "",
+                count: this.state.count + 1
+            })
+        }).catch((err) => console.log(err));
     }
-    
+
     render() {
         return (
             <React.Fragment>
@@ -75,10 +110,11 @@ interface ITimelineProps {
 
 interface ITimelineState {
     chirpArray: {
-        id: number,
+        id: string,
         user: string,
         chirp: string
     }[];
     user: string;
     chirptext: string;
+    count: number;
 }
