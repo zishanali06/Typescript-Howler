@@ -4,12 +4,13 @@ import apiRouter from './routes';
 import chirpRouter from './chirpapiroutes';
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 let p = path.join(__dirname, '../public');
 console.log(p);
-
 app.use(express.static(p));
-app.use('/api/chirp', chirpRouter);
+app.use(chirpRouter);
 app.use(apiRouter);
 
 const port = process.env.PORT || 3000;

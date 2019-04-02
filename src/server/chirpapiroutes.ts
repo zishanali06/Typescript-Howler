@@ -2,8 +2,8 @@ import * as express from 'express';
 import * as chirpStore from './chirpstore';
 const chirpRouter = express.Router();
 
-chirpRouter.get("/:id?", (req, res) =>{
-    let id = req.params.id;
+chirpRouter.get("/api/chirp/:id?", (req, res) =>{
+    let id: string = req.params.id;
     if(id) {
         res.send(chirpStore.GetChirp(id));
     } else {
@@ -12,17 +12,17 @@ chirpRouter.get("/:id?", (req, res) =>{
 });
 
 //creating a chirp
-chirpRouter.post("/", (req, res) => {
+chirpRouter.post("/api/chirp/", (req, res) => {
     chirpStore.CreateChirp(req.body);
     res.sendStatus(200);
 });
 
-chirpRouter.put("/:id", (req, res) => {
+chirpRouter.put("/api/chirp/:id", (req, res) => {
     chirpStore.UpdateChirp(req.params.id, req.body);
     res.sendStatus(200);
 });
 
-chirpRouter.delete("/:id", (req, res) => {
+chirpRouter.delete("/api/chirp/:id", (req, res) => {
     chirpStore.DeleteChirp(req.params.id);
     res.sendStatus(200);
 });

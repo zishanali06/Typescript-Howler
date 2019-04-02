@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
+import Timeline from './Timeline';
 
 import './scss/app';
 
@@ -19,8 +21,14 @@ export default class App extends React.Component<IAppProps, IAppState> {
     render () {
         return (
             <main className="container">
-                <h1 className="covalence-blue">Hello {this.state.name}!</h1>
-                <h2></h2>
+                <section className="row text-center">
+                    <h1 className="col-12">Howler Plus!</h1>
+                </section>
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Timeline}></Route>
+                    </Switch>
+                </Router>
             </main>
         )
     }
