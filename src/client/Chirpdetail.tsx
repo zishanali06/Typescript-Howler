@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RouteComponentProps, Redirect } from 'react-router';
+import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class Chirpdetail extends React.Component<IChirpdetailProps, IChirpdetailState> {
     constructor(props: IChirpdetailProps) {
@@ -36,6 +37,10 @@ export default class Chirpdetail extends React.Component<IChirpdetailProps, IChi
     }
 
     render() {
+        let chirp = {
+            username: this.state.user,
+            chirp: this.state.chirp
+        };
         return ( 
             <section className="row text-center">
                 <section className="col-12"><h1>Chirp Detials</h1></section>
@@ -43,6 +48,7 @@ export default class Chirpdetail extends React.Component<IChirpdetailProps, IChi
                 <section className="col-4">
                 <h3>Username: {this.state.user}</h3>
                 <h3>Chirp: {this.state.chirp}</h3>
+                <Link to={`/chirp/${this.props.match.params.id}/edit`} className="btn btn-dark">Change Chirp</Link>
                 </section>
                 <section className="col-4"><button className="btn btn-danger" onClick={this.handleDeleteClick}>X</button></section>
             </section>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 import Timeline from './Timeline';
 import Chirpdetail from './Chirpdetail';
+import Chirpchange from './Chirpchange';
 
 import './scss/app';
 
@@ -28,6 +29,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Timeline}></Route>
+                        <Route path="/chirp/:id/edit" component={Chirpchange}></Route>
                         <Route path="/chirp/:id" component={Chirpdetail}></Route>
                     </Switch>
                 </Router>
