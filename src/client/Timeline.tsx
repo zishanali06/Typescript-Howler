@@ -5,7 +5,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
 
     constructor(props: ITimelineProps) {
         super(props);
-        
+
         this.state = {
             chirpArray: [],
             user: "",
@@ -14,7 +14,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
         }
     }
 
-    
+
     async componentDidMount() {
         let getchirpdata = await fetch('/api/chirp');
         let name = await getchirpdata.json();
@@ -26,10 +26,10 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
             }
         });
         newchirparray.pop();
-        this.setState({ 
+        this.setState({
             chirpArray: newchirparray,
             count: name.nextid
-         });
+        });
     }
 
     handleonClick = (e: React.MouseEvent) => {
@@ -40,15 +40,15 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
         };
 
         fetch('/api/chirp', {
-            method: "POST", 
+            method: "POST",
             mode: "cors",
             cache: "no-cache",
             credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json",
             },
-            redirect: "follow", 
-            referrer: "no-referrer", 
+            redirect: "follow",
+            referrer: "no-referrer",
             body: JSON.stringify(chirp) // body data type must match "Content-Type" header
         }).then(() => {
             let chirptoaddinarray = {
@@ -57,7 +57,7 @@ export default class Timeline extends React.Component<ITimelineProps, ITimelineS
                 chirp: chirp.chirp
             }
             this.setState({
-                chirpArray: [ ...this.state.chirpArray, chirptoaddinarray],
+                chirpArray: [...this.state.chirpArray, chirptoaddinarray],
                 user: "",
                 chirptext: "",
                 count: this.state.count + 1
