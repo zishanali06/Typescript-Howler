@@ -32,7 +32,7 @@ export default class Chirpdetail extends React.Component<IChirpdetailProps, IChi
             redirect: "follow",
             referrer: "no-referrer"
         }).then(() => {
-            window.location.replace('http://localhost:3000/')
+            this.props.history.goBack();
         }).catch((err) => console.log(err));
     }
 
@@ -44,13 +44,13 @@ export default class Chirpdetail extends React.Component<IChirpdetailProps, IChi
         return ( 
             <section className="row text-center">
                 <section className="col-12"><h1>Chirp Detials</h1></section>
-                <section className="col-4"></section>
-                <section className="col-4">
+                <section className="col-2"></section>
+                <section className="col-8">
                 <h3>Username: {this.state.user}</h3>
                 <h3>Chirp: {this.state.chirp}</h3>
                 <Link to={`/chirp/${this.props.match.params.id}/edit`} className="btn btn-dark">Change Chirp</Link>
                 </section>
-                <section className="col-4"><button className="btn btn-danger" onClick={this.handleDeleteClick}>X</button></section>
+                <section className="col-2"><button className="btn btn-danger" onClick={this.handleDeleteClick}>X</button></section>
             </section>
         )
     }

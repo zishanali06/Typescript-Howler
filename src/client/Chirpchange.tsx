@@ -37,7 +37,7 @@ export default class Chirpchange extends React.Component<IChirpchangeProps, IChi
             referrer: "no-referrer",
             body: JSON.stringify(chirp)
         }).then(() => {
-            window.location.replace('http://localhost:3000/')
+            this.props.history.push('/');
         }).catch((err) => console.log(err));
 
     }
